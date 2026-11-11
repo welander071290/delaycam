@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>iPhone 15-forhåndsvisning – DelayCam</title>
+<style>
+  html,body{margin:0;height:100%;background:#2b2523;font:14px -apple-system,Segoe UI,sans-serif;color:#ddd}
+  body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden}
+  .bar{display:flex;gap:8px;align-items:center}
+  .bar button{background:#3d3431;color:#eee;border:1px solid #5a4d48;border-radius:8px;padding:6px 12px;cursor:pointer}
+  #holder{position:relative}
+  #phone{position:absolute;top:0;left:0;transform-origin:0 0;border-radius:55px;padding:14px;background:#111;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+  iframe{display:block;border:0;border-radius:42px;background:#000}
+</style>
+</head>
+<body>
+  <!-- Kun til udvikling: npm run dev, åbn derefter /pwa/iphone15.html -->
+  <div class="bar">
+    <span id="info"></span>
+    <button id="rot">↻ Drej</button>
+    <button id="reload">⟳ Genindlæs</button>
+  </div>
+  <div id="holder"><div id="phone"><iframe id="f" src="/" allow="camera; fullscreen; screen-wake-lock"></iframe></div></div>
+<script>
+  // iPhone 15: 393 × 852 CSS-pixels
+  let portrait = true;
+  const f = document.getElementById('f'), phone = document.getElementById('phone'), holder = document.getElementById('holder');
+  function layout() {
+    const w = portrait ? 393 : 852, h = portrait ? 852 : 393, pw = w + 28, ph = h + 28;
+    f.style.width = w + 'px'; f.style.height = h + 'px';
+    const s = Math.min(1, (innerWidth - 20) / pw, (innerHeight - 60) / ph);
+    phone.style.transform = `scale(${s})`;
+    holder.style.width = pw * s + 'px'; holder.style.height = ph * s + 'px';
+    document.getElementById('info').textContent = `iPhone 15 ${portrait ? 'stående' : 'liggende'} – ${w}×${h} (vist i ${Math.round(s * 100)} %)`;
+  }
+  document.getElementById('rot').onclick = () => { portrait = !portrait; layout(); };
+  document.getElementById('reload').onclick = () => f.contentWindow.location.reload();
+  addEventListener('resize', layout); layout();
+</script>
+</body>
+</html>

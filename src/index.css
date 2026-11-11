@@ -1,0 +1,54 @@
+:root {
+  --paper: #f8f6ef;
+  --paper-deep: #ebe8de;
+  --shadow-paper: #d7d2c5;
+  --ink: #1f2320;
+  --muted: #68706a;
+  --muted-light: #9ba097;
+  --line: #d8d5ca;
+  --line-strong: #bbb8ae;
+  --green: #307e5b;
+  --green-soft: #dcebe1;
+  --orange: #c55d32;
+  --orange-soft: #f5dfd3;
+  --lime: #daea5d;
+  --display: Georgia, 'Times New Roman', serif;
+  --body: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  --mono: Consolas, 'Courier New', monospace;
+
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(rgba(31, 35, 32, 0.035) 1px, transparent 1px),
+    var(--paper);
+  background-size: 100% 32px;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+#root {
+  min-height: 100vh;
+}
