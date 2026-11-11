@@ -576,7 +576,7 @@ function App() {
           <div className="control-hud" onClick={(event) => event.stopPropagation()}>
             <div className="hud-header">
               <div className="hud-brand">
-                <span className="hud-mark">DC</span>
+                <img className="hud-mark hud-logo" src={`${import.meta.env.BASE_URL}icon.svg`} alt="" />
                 <div>
                   <span className="hud-kicker">DELAY CAM</span>
                   <strong>Spring replay</strong>

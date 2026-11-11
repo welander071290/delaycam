@@ -1,7 +1,7 @@
 // Offline first: answer from the cache immediately and fetch the newest version in the background
 // (stale-while-revalidate). The build fills in the cache version and file list (see vite.config.ts).
-const CACHE = 'delaycam-5890d0f0627c';
-const FILES = ["./","./assets/index-DWy6qi2h.js","./assets/index-mOELW_og.css","./index.html","./favicon.svg","./icon-180.png","./icon-512.png","./icons.svg","./manifest.webmanifest"];
+const CACHE = 'delaycam-da43bc107491';
+const FILES = ["./","./assets/index-DMbs3ZPK.js","./assets/index-BkxYWQ9y.css","./index.html","./favicon.svg","./icon-180.png","./icon-512.png","./icon.svg","./icons.svg","./manifest.webmanifest"];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(FILES)).then(() => self.skipWaiting()));
@@ -16,15 +16,26 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+let updateFound = false;
+
 async function notifyUpdate() {
+  updateFound = true;
   const clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
   clients.forEach((client) => client.postMessage({ type: 'update-ready' }));
 }
+
+// The page may not be listening yet when the update is detected, so it asks once it is ready.
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'check-update' && updateFound) {
+    event.source?.postMessage({ type: 'update-ready' });
+  }
+});
 
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
   const isPage = request.mode === 'navigate';
+  if (isPage) updateFound = false;
 
   event.respondWith(
     (async () => {

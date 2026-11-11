@@ -505,6 +505,12 @@ body,
   user-select: none;
 }
 
+.hud-logo {
+  width: 36px;
+  height: 36px;
+  background: none;
+}
+
 .update-banner {
   position: absolute;
   z-index: 6;

@@ -17,6 +17,9 @@ export function registerServiceWorker(onUpdateReady: () => void) {
 
   navigator.serviceWorker.addEventListener('message', handleMessage)
   navigator.serviceWorker.register('./sw.js').catch(() => undefined)
+  navigator.serviceWorker.ready
+    .then((registration) => registration.active?.postMessage({ type: 'check-update' }))
+    .catch(() => undefined)
 
   return () => navigator.serviceWorker.removeEventListener('message', handleMessage)
 }
