@@ -41,23 +41,24 @@ npm run lint
 npm run build
 ```
 
-## iPhone / iPad (web app)
+## iPhone / iPad / Android (web app)
 
 The same React app is published as an offline-capable web app (PWA) on GitHub Pages:
 
 **https://welander071290.github.io/delaycam/**
 
-1. Open the address in **Safari** (needs internet the first time).
-2. Tap **Share → Add to Home Screen** and always start DelayCam from that icon.
+1. Open the address in **Safari** on iPhone/iPad or **Chrome** on Android (needs internet the first time).
+2. iPhone/iPad: tap **Share → Add to Home Screen**. Android: tap **⋮ → Install app / Add to Home screen**. Always start DelayCam from that icon.
 3. Allow camera access. The back camera is used by default; other cameras (front, ultra wide) can be chosen under *Camera*.
 
 Differences from the Windows app:
 
-- Defaults to 720p / 30 fps, and the frame buffer is capped at about 220 MB so Safari does not close the app. If *buffered* stays below the chosen delay, select a lower quality.
-- The screen is kept on while the camera runs (Wake Lock, iOS 18.4+).
-- iOS stops the camera when the app goes to the background; DelayCam restarts it when you return (the buffer starts over).
-- Rotating the phone is supported; the picture follows the camera orientation.
-- *Full screen* is only shown where the browser supports it, and *Close* only in the Windows app.
+- On phones and tablets it defaults to 720p / 30 fps, and the frame buffer is capped at about 220 MB so the browser does not close the app. If *buffered* stays below the chosen delay, select a lower quality.
+- The screen is kept on while the camera runs (Wake Lock; iOS 18.4+).
+- Mobile systems stop the camera when the app goes to the background; DelayCam restarts it when you return (the buffer starts over).
+- Rotating the device is supported; the picture follows the camera orientation.
+- *Full screen* is only shown where the browser supports it (not on iPhone), and *Close* only in the Windows app.
+- USB cameras on Android only appear if the tablet itself supports external (UVC) cameras.
 
 Camera access in Safari requires https, so the app cannot be tested on the iPhone over plain `http://<pc-ip>:5173`. Test layout locally with `npm run dev` and open `http://127.0.0.1:5173/pwa/iphone15.html` (iPhone 15 frame, portrait/landscape).
 

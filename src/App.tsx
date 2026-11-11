@@ -16,16 +16,17 @@ const IS_ELECTRON = Boolean(window.delayCam)
 const IS_IOS =
   /iPad|iPhone|iPod/.test(navigator.userAgent) ||
   (navigator.userAgent.includes('Macintosh') && navigator.maxTouchPoints > 1)
+const IS_MOBILE = IS_IOS || /Android/i.test(navigator.userAgent)
 const CAN_FULLSCREEN = Boolean(document.fullscreenEnabled)
 
 const MAX_BUFFER_MS = 30_000
-// Mobile Safari kills the page when it uses too much memory, so the frame buffer is capped there.
-const MAX_BUFFER_BYTES = IS_IOS ? 220 * 1024 * 1024 : Number.POSITIVE_INFINITY
+// Mobile browsers kill the page when it uses too much memory, so the frame buffer is capped there.
+const MAX_BUFFER_BYTES = IS_MOBILE ? 220 * 1024 * 1024 : Number.POSITIVE_INFINITY
 const DEFAULT_CAPTURE_WIDTH = 1920
 const DEFAULT_CAPTURE_HEIGHT = 1080
 const DEFAULT_CAPTURE_FPS = 60
-const DEFAULT_QUALITY: QualityPreset = IS_IOS ? '720p30' : 'max'
-const JPEG_QUALITY = IS_IOS ? 0.8 : 0.9
+const DEFAULT_QUALITY: QualityPreset = IS_MOBILE ? '720p30' : 'max'
+const JPEG_QUALITY = IS_MOBILE ? 0.8 : 0.9
 const QUALITY_PRESETS: Record<QualityPreset, { label: string; width: number; height: number; frameRate: number }> = {
   max: { label: 'MAX / Auto', width: DEFAULT_CAPTURE_WIDTH, height: DEFAULT_CAPTURE_HEIGHT, frameRate: DEFAULT_CAPTURE_FPS },
   '1080p60': { label: '1080p / 60 fps', width: 1920, height: 1080, frameRate: 60 },

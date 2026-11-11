@@ -1,7 +1,7 @@
 // Offline first: answer from the cache immediately and fetch the newest version in the background
 // (stale-while-revalidate). The build fills in the cache version and file list (see vite.config.ts).
-const CACHE = 'delaycam-da43bc107491';
-const FILES = ["./","./assets/index-DMbs3ZPK.js","./assets/index-BkxYWQ9y.css","./index.html","./favicon.svg","./icon-180.png","./icon-512.png","./icon.svg","./icons.svg","./manifest.webmanifest"];
+const CACHE = 'delaycam-264749d67a15';
+const FILES = ["./","./assets/index-DdZ59RjS.js","./assets/index-BkxYWQ9y.css","./index.html","./favicon.svg","./icon-180.png","./icon-512.png","./icon-maskable-512.png","./icon.svg","./icons.svg","./manifest.webmanifest"];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(FILES)).then(() => self.skipWaiting()));
